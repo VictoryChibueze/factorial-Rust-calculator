@@ -1,88 +1,102 @@
-// building a recursive factorial calculator
+/*
 
+This program calculates the factorial of a given non-negative integer using recursion 
+and tracks the intermediate computation steps. 
+The project demonstrates Rust's handling of variables, expressions, conditionals,
+loops, functions with ownership and references,
+and object-oriented techniques using `struct` and `impl`.
+
+*/
+
+// Importing standard input and output libraries
 use std::io::{self,Write};
 
-// initializing a struct
+// Struct to represent a factorial calculator
 struct FactorialCalculator{
-    // The history of the calculator as a vector 
+   // Stores intermediate results of factorial computation
     history: Vec<u64>,
+
 }
 
 
-// All of these basic requirements:
-// Variables (mutable and immutable)
-
-// Expressions
-
-// Conditionals
-
-// Loops
-
-// Functions (ownership or reference)
-
-// One of these additional requirements:
-
-// Use a data structure (e.g. Vec, LinkedList, Hashmap).
-
-// Use slicing.
-
-// Use object oriented techniques using both struct and impl.
 
 impl FactorialCalculator{
+
+    // Constructor to initialize a new FactorialCalculator with an empty history
     fn new() -> Self{
         Self {history: Vec::new()}
     }
 
+     // Recursive function to compute the factorial of a given number
     fn compute_factorial(&mut self, n:u64) -> u64{
+
         if n == 0{
+        // Base case: factorial of 0 is 1
             1
+                 
         }else {
-            // creating an expression to suit the requirement of the assignment
+
             let mut temp = n;
-            // a for loop for recursive factorial
-            for _ in 0..1{
-                temp *= self.compute_factorial(n-1);
-                self.history.push(temp)
-    
+            
+            // Loop executes only once, effectively calling recursion
+            for _ in 0..1 {
+
+                // Recursive call
+                temp *= self.compute_factorial(n - 1); 
+
+                // Store intermediate results in history
+                self.history.push(temp); 
             }
-            temp
+            // Return the computed factorial value
+            temp 
         }
 
 
     }
 
-    fn show_history(&self){
-        println!("Intermediate value: {:?}",self.history);
+     // Function to display the history of computed factorial steps
+     fn show_history(&self) {
+        println!("Intermediate values: {:?}", self.history);
     }
+
 }
 
 
-fn main(){
-    
-    let mut digit = String::new();
+fn main() {
 
-    print!("Enter a digit:");
-    io::stdout().flush().unwrap();
+    // Variable to store user input
 
+    let mut digit = String::new(); 
+
+    // Prompt the user for input
+    print!("Enter a digit: ");
+
+    // Ensures the prompt is displayed before input
+    io::stdout().flush().unwrap(); 
+
+    // Read input from the user
     io::stdin()
-       .read_line(&mut digit)
-       .expect("Failed to read number");
-    
+        .read_line(&mut digit)
+        .expect("Failed to read number");
 
+    // Parse the input to an unsigned 64-bit integer
+    match digit.trim().parse::<u64>() {
+        Ok(n) => {
 
-    match digit.trim().parse::<u64>(){
-        Ok(n)=>{
+            // Create a new calculator instance
             let mut calculator = FactorialCalculator::new();
-            let result = calculator.compute_factorial(n);
 
-            println!("Factorial of {} is: {}",n,result);
+            // Compute factorial
+            let result = calculator.compute_factorial(n); 
+            
+            // Display result
+            println!("Factorial of {} is: {}", n, result); 
 
-            calculator.show_history();
+            // Display intermediate computation steps
+            calculator.show_history(); 
         }
 
-        Err(_) => println!("Invalid input! Please enter a valid non-negative number"),
+        // Handle invalid input
+        Err(_) => println!("Invalid input! Please enter a valid non-negative number"), 
     }
-
-
 }
-
