@@ -2,9 +2,31 @@
 
 use std::io::{self,Write};
 
+// initializing a struct
 struct FactorialCalculator{
+    // The history of the calculator as a vector 
     history: Vec<u64>,
 }
+
+
+// All of these basic requirements:
+// Variables (mutable and immutable)
+
+// Expressions
+
+// Conditionals
+
+// Loops
+
+// Functions (ownership or reference)
+
+// One of these additional requirements:
+
+// Use a data structure (e.g. Vec, LinkedList, Hashmap).
+
+// Use slicing.
+
+// Use object oriented techniques using both struct and impl.
 
 impl FactorialCalculator{
     fn new() -> Self{
